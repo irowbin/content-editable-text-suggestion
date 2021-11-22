@@ -1,12 +1,15 @@
-<div contenteditable="true"
-#editor
-    style="height: 200px; width: 200px; border: 1px solid #dedede; outline: none; padding: 10px; border-radius:5px;"
-    (keyup)="onInputs($event)">
+<div
+  contenteditable="true"
+  #editor
+  style="height: 200px; width: 200px; border: 1px solid #dedede; outline: none; padding: 10px; border-radius:5px;"
+  (keyup)="onInputs($event)"
+></div>
 
-</div>
-
-<ul style="box-shadow: 0 0 5px 0; width: 100px; position: fixed;padding:5px 10px;margin:0; list-style: none; display: none;"
-    #suggest
-    >
- <li (click)="onSelect('item 1')" *ngFor="let s of filteredSuggestion">{{s}}</li>
+<ul
+  style="box-shadow: 0 0 5px 0; width: 100px; position: fixed;padding:5px 10px;margin:0; list-style: none; display: none;"
+  #suggest
+>
+  <li (click)="onSelect('item 1')" *ngFor="let s of filteredSuggestion">
+    {{ s }}
+  </li>
 </ul>
