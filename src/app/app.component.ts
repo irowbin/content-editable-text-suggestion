@@ -6,40 +6,45 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  suggestions = ['test', 'demo', 'awesome','thanks']
-  filteredSuggestion = []
+  suggestions = ['test', 'demo', 'awesome', 'thanks'];
+  filteredSuggestion = [];
   @ViewChild('suggest')
   ulContainer: ElementRef<any>;
   @ViewChild('editor')
   editorContainer: ElementRef<HTMLDivElement>;
+  isActive: boolean;
   onInputs(e) {
-    
     const ele = this.ulContainer.nativeElement as HTMLElement;
     var r = window.getSelection().getRangeAt(0);
-    const text = r.endContainer.textContent
+    const text = r.endContainer.textContent;
     const rect = r.getBoundingClientRect();
     var relative = (document.body.parentNode as any).getBoundingClientRect();
     ele.style.top = rect.bottom - relative.top + 'px'; //this will place ele below the selection
-   setTimeout(()=>{
-    ele.style.right = -((rect.right + ele.offsetWidth) - relative.right) + 'px'; //this will align the right edges together
-   })
+    setTimeout(() => {
+      ele.style.right = -(rect.right + ele.offsetWidth - relative.right) + 'px'; //this will align the right edges together
+    });
 
-    if(r.endContainer.textContent){
-      ele.style.display = 'block'
-      this.filteredSuggestion = this.suggestions.slice().filter(s=>s.includes(text))
-    }else{
-      ele.style.display = 'none'
-      this.filteredSuggestion = this.suggestions.slice()
+    if (r.endContainer.textContent) {
+      ele.style.visibility = 'visible';
+      ele.style.opacity = '1';
+      this.isActive = true;
+
+      this.filteredSuggestion = this.suggestions
+        .slice()
+        .filter((s) => s.includes(text));
+    } else {
+      ele.style.visibility = 'hidden';
+      ele.style.opacity = '0';
+      this.filteredSuggestion = this.suggestions.slice();
+      this.isActive = false;
     }
-    console.log(r.endContainer.textContent)
-    
   }
 
-  onSelect(text){
-     const editor =  this.editorContainer.nativeElement;
+  onSelect(text) {
+    const editor = this.editorContainer.nativeElement;
 
-     editor.innerHTML = editor.innerHTML + '<br/>' + text
+    editor.innerHTML = editor.innerHTML + '<br/>' + text;
 
-     this.ulContainer.nativeElement.style.display = 'none'
+    this.ulContainer.nativeElement.style.display = 'none';
   }
 }

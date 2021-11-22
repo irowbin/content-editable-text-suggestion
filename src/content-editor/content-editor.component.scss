@@ -1,0 +1,22 @@
+:host {
+  .editor-content {
+    height: 200px;
+    width: 200px;
+    border: 1px solid #dedede;
+    outline: none;
+    padding: 10px;
+    border-radius: 5px;
+  }
+  .editor-suggestion-list {
+    box-shadow: 0 0 5px 0;
+    width: 100px;
+    position: fixed;
+    padding: 5px 10px;
+    margin: 0;
+    list-style: none;
+    visibility: hidden;
+    opacity: 0;
+    transition: 0.4s visibility;
+    display: block;
+  }
+}

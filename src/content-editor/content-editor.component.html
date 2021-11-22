@@ -1,0 +1,14 @@
+<div  #editor 
+      [contenteditable]="true"
+      [ngClass]="editorPanelClass"
+      (keyup)="onInputs($event)">
+</div>
+
+<ul
+    [ngClass]="editor-suggestion-list"
+    #suggest
+>
+  <li (click)="onSelect(s)" *ngFor="let s of filteredSuggestion">
+    {{ s }}
+  </li>
+</ul>
